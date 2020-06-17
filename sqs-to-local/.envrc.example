@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Import envrc from parent directory.
+source_up
+
+# SQS poll interval seconds
+# export POLL_INTERVAL="60"
+
+# Maybe it is Jenkins URL in locally running.
+export LOCAL_HOOK_URL="http://localhost:8080/github-webhook/"
+
+# AWS access key to consume messages from SQS
+export AWS_ACCESS_KEY_ID="<REQUIRED>"
+export AWS_SECRET_ACCESS_KEY="<REQUIRED>"

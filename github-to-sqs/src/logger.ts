@@ -57,7 +57,7 @@ export class Logger {
     private readonly componentName: string,
     private readonly filename: string,
     public consoleLevel: LogLevel = LogLevel.trace,
-    public slackLevel: LogLevel = LogLevel.info
+    public slackLevel: LogLevel = LogLevel.warn
   ) {}
 
   public trace = (context: unknown, message: string): void =>
@@ -140,7 +140,7 @@ async function postToSlack(text: string): Promise<void> {
     body: JSON.stringify({
       text,
       channel: process.env.SLACK_CHANNEL,
-      username: process.env.SLACK_USERNAME,
+      username: process.env.SLACK_USERNAME ?? "Logger",
     }),
   });
   const responseText = await response.text();

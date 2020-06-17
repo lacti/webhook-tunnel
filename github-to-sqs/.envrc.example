@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Import envrc from parent directory.
+source_up
+
+# For example, it is GitHub Webhook secret.
+# It can be omitted.
+# export WEBHOOK_SECRET="GITHUB_WEBHOOK_SECRET"
+
+# AWS access key to deploy this stack via CloudFormation
+export AWS_ACCESS_KEY_ID="<REQUIRED>"
+export AWS_SECRET_ACCESS_KEY="<REQUIRED>"

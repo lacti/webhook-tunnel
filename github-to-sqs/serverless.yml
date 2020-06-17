@@ -15,7 +15,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs12.x
-  region: ap-northeast-2
+  region: ${env:AWS_DEFAULT_REGION, "ap-northeast-2"}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
