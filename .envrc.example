@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Import envrc from parent directory.
+type -t source_up > /dev/null
+if [ $? -eq 0 ]; then
+  source_up
+fi
+
+export WEBHOOK_SECRET="GITHUB_WEBHOOK_SECRET"
+export TUNNEL_QUEUE_NAME="SQS_QUEUE_NAME_FOR_REQUEST"
+
+export CONSOLE_LOG_LEVEL="trace"
+# export SLACK_LOG_LEVEL="info"
+# export SLACK_WEBHOOK_URL="SLACK_WEBHOOK_URL"
+# export SLACK_USERNAME="Logger"
+# export SLACK_CHANNEL="SLACK_CHANNEL_ID"
+
+export POLL_INTERVAL="60"
+
+# Maybe it is Jenkins URL in locally running.
+export LOCAL_HOOK_URL="http://localhost:8080/github-webhook/"
+
+# I'm living in South Korea :)
+# export AWS_DEFAULT_REGION="ap-northeast-2"
+

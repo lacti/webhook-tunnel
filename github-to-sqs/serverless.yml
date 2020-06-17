@@ -1,0 +1,56 @@
+service:
+  name: webhook-tunnel
+
+plugins:
+  - serverless-plugin-scripts
+  - serverless-webpack
+  - serverless-prune-plugin
+  - serverless-offline
+
+custom:
+  prune:
+    automatic: true
+    number: 7
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-northeast-2
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "sqs:GetQueueUrl"
+        - "sqs:SendMessage"
+      Resource:
+        - Fn::Join:
+            - ":"
+            - - arn
+              - aws
+              - sqs
+              - Ref: AWS::Region
+              - Ref: AWS::AccountId
+              - ${env:TUNNEL_QUEUE_NAME}
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    WEBHOOK_SECRET: ${env:WEBHOOK_SECRET}
+    TUNNEL_QUEUE_NAME: ${env:TUNNEL_QUEUE_NAME}
+    CONSOLE_LOG_LEVEL: ${env:CONSOLE_LOG_LEVEL}
+    SLACK_LOG_LEVEL: ${env:SLACK_LOG_LEVEL}
+    SLACK_WEBHOOK_URL: ${env:SLACK_WEBHOOK_URL}
+    SLACK_USERNAME: ${env:SLACK_USERNAME}
+    SLACK_CHANNEL: ${env:SLACK_CHANNEL}
+
+functions:
+  webhook:
+    handler: src/handler.webhook
+    events:
+      - http:
+          method: post
+          path: hook
+
+resources:
+  Resources:
+    MyQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: ${env:TUNNEL_QUEUE_NAME}
