@@ -7,7 +7,9 @@
   "author": "jaeyoung <lactrious@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "start": "ts-node src/main.ts",
+    "build": "webpack",
+    "postbuild": "pkg -t node12-linux,node12-win,node12-macos .webpack/main.js --out-path dist"
   },
   "devDependencies": {
     "@types/node": "12",
@@ -23,8 +25,10 @@
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.10",
+    "pkg": "^4.4.8",
     "prettier": "^2.0.5",
     "ts-loader": "^7.0.5",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
