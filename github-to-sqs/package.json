@@ -8,7 +8,7 @@
     "deploy": "sls deploy"
   },
   "dependencies": {
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "p-memoize": "^4.0.1",
     "serialize-error": "^8.1.0",
     "source-map-support": "^0.5.19"
